@@ -75,7 +75,8 @@ export const Navbar: React.FC = () => {
           <AudioToggle />
 
           <a
-            href="mailto:shoaibakhtar.dev.eng@gmail.com?subject=Shoaib%20Akhtar%20Resume%20Request"
+            href="/Shoaib_Akhtar_Resume.pdf"
+            download="Shoaib_Akhtar_Resume.pdf"
             onMouseEnter={playHover}
             onClick={playClick}
             className="flex items-center gap-2 px-3.5 py-1.5 bg-white text-black font-bold text-xs uppercase tracking-wider border border-white hover:bg-black hover:text-white transition-none cursor-pointer"
@@ -120,7 +121,8 @@ export const Navbar: React.FC = () => {
           </div>
 
           <a
-            href="mailto:shoaibakhtar.dev.eng@gmail.com?subject=Shoaib%20Akhtar%20Resume%20Request"
+            href="/Shoaib_Akhtar_Resume.pdf"
+            download="Shoaib_Akhtar_Resume.pdf"
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-bold text-xs uppercase tracking-wider border border-white hover:bg-black hover:text-white"
           >
