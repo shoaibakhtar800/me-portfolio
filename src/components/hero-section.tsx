@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAudio } from "./audio-controller";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, LeetcodeIcon } from "./icons";
 import {
   ArrowRight,
   Code2,
@@ -112,8 +112,9 @@ export const HeroSection: React.FC = () => {
         {/* Social Links Row */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-12 sm:mb-16 font-mono text-xs">
           {[
-            { name: "LINKEDIN", href: "https://linkedin.com", icon: LinkedinIcon },
-            { name: "GITHUB", href: "https://github.com", icon: GithubIcon },
+            { name: "LINKEDIN", href: "https://www.linkedin.com/in/shoaib-akhtar-dev", icon: LinkedinIcon },
+            { name: "GITHUB", href: "https://github.com/shoaibakhtar800", icon: GithubIcon },
+            { name: "LEETCODE", href: "https://leetcode.com/u/cs08018akp", icon: Code2 },
             { name: "EMAIL", href: "mailto:shoaibakhtar.dev.eng@gmail.com", icon: Mail },
           ].map((soc) => (
             <a

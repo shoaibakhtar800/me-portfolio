@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAudio } from "./audio-controller";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, LeetcodeIcon } from "./icons";
 import {
   Mail,
   Phone,
@@ -121,9 +121,9 @@ export const ContactSection: React.FC = () => {
             {/* Social Buttons */}
             <div className="flex items-center gap-2">
               {[
-                { name: "LINKEDIN", href: "https://linkedin.com", icon: LinkedinIcon },
-                { name: "GITHUB", href: "https://github.com", icon: GithubIcon },
-                { name: "LEETCODE", href: "https://leetcode.com", icon: Code2 },
+                { name: "LINKEDIN", href: "https://www.linkedin.com/in/shoaib-akhtar-dev", icon: LinkedinIcon },
+                { name: "GITHUB", href: "https://github.com/shoaibakhtar800", icon: GithubIcon },
+                { name: "LEETCODE", href: "https://leetcode.com/u/cs08018akp", icon: Code2 },
               ].map((soc) => (
                 <a
                   key={soc.name}
