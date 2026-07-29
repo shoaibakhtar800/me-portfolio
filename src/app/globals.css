@@ -1,26 +1,92 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0px !important;
+  }
+  
+  html {
+    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background-color: #000000;
+    color: #ffffff;
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* High contrast monochrome text selection */
+  ::selection {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  ::-moz-selection {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Inverted elements selection override (Black selection background for white container text) */
+  .bg-white ::selection,
+  .bg-white::selection {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .bg-white ::-moz-selection,
+  .bg-white::-moz-selection {
+    background-color: #000000 !important;
+    color: #ffffff !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Old school CRT Scanline Effect */
+.scanline-bg {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.4)
+  );
+  background-size: 100% 4px;
+}
+
+/* Sharp Brutalist Button Hover Invert */
+.btn-brutalist {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  transition: none;
+}
+
+.btn-brutalist:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.btn-brutalist-inv {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  transition: none;
+}
+
+.btn-brutalist-inv:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
