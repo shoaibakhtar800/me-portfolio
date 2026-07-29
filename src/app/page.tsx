@@ -1,4 +1,5 @@
 import { AudioProvider } from "@/components/audio-controller";
+import { Preloader } from "@/components/preloader";
 import { CustomCursor } from "@/components/custom-cursor";
 import { HeroCanvas } from "@/components/hero-canvas";
 import { Navbar } from "@/components/navbar";
@@ -14,6 +15,9 @@ import { Footer } from "@/components/footer";
 export default function Home() {
   return (
     <AudioProvider>
+      {/* Cyber-Brutalist Preloader Screen */}
+      <Preloader />
+
       {/* Background Interactive Particles WebGL Canvas */}
       <HeroCanvas />
 
