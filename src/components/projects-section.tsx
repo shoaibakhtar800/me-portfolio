@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAudio } from "./audio-controller";
 import {
   Code2,
@@ -26,6 +26,25 @@ interface Project {
 export const ProjectsSection: React.FC = () => {
   const { playHover, playClick } = useAudio();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Lock body scroll when modal is active to prevent background page scroll
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
 
   const projects: Project[] = [
     {
@@ -76,15 +95,15 @@ export const ProjectsSection: React.FC = () => {
   ];
 
   return (
-    <section id="projects" className="py-28 relative z-10 border-t border-neutral-800 bg-black font-mono text-white">
+    <section id="projects" className={`py-20 sm:py-28 relative border-t border-neutral-800 bg-black font-mono text-white ${selectedProject ? "z-[100]" : "z-10"}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 text-left">
-          <div className="inline-block px-3 py-1 bg-black border border-white text-xs uppercase tracking-widest mb-3">
+        <div className="mb-8 sm:mb-12 text-left">
+          <div className="inline-block px-2.5 py-1 bg-black border border-white text-[10px] sm:text-xs uppercase tracking-widest mb-3">
             [03] FLAGSHIP_ARCHITECTURES // FEATURED PROJECTS
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
-            FLAGSHIP <span className="bg-white text-black px-2">AI SYSTEMS</span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight">
+            FLAGSHIP <span className="bg-white text-black px-1.5 sm:px-2 selection:bg-black selection:text-white">AI SYSTEMS</span>
           </h2>
         </div>
 
@@ -158,29 +177,36 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Detail Modal */}
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 font-mono text-white">
-            <div className="relative w-full max-w-3xl p-8 bg-black border-2 border-white max-h-[90vh] overflow-y-auto">
+          <div
+            onClick={() => setSelectedProject(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/95 font-mono text-white backdrop-blur-md"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl p-5 sm:p-8 bg-black border-2 border-white max-h-[85vh] overflow-y-auto custom-scrollbar"
+            >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 p-2 bg-white text-black font-bold border border-white hover:bg-black hover:text-white"
+                className="absolute top-4 sm:top-6 right-4 sm:right-6 p-2 bg-white text-black font-bold border border-white hover:bg-black hover:text-white cursor-pointer"
+                title="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="text-xs border border-white px-3 py-1 inline-block mb-3">
-                [{selectedProject.year} // {selectedProject.category}]
+                [{selectedProject.year} {"//"} {selectedProject.category}]
               </div>
 
-              <h2 className="text-2xl font-extrabold uppercase mb-1">{selectedProject.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-extrabold uppercase mb-1">{selectedProject.title}</h2>
               <p className="text-neutral-400 text-xs mb-6">{selectedProject.subtitle}</p>
 
               {/* Architecture text */}
-              <div className="p-4 bg-neutral-950 border border-white mb-6">
+              <div className="p-3 sm:p-4 bg-neutral-950 border border-white mb-6">
                 <div className="flex items-center gap-2 text-xs uppercase mb-2 text-neutral-300">
-                  <Terminal className="w-4 h-4" />
+                  <Terminal className="w-4 h-4 shrink-0" />
                   <span>SYSTEM ARCHITECTURE DIAGRAM:</span>
                 </div>
-                <div className="text-xs text-white bg-black p-3 border border-neutral-800 overflow-x-auto whitespace-nowrap">
+                <div className="text-xs text-white bg-black p-3 border border-neutral-800 overflow-x-auto whitespace-nowrap custom-scrollbar">
                   {selectedProject.architecture}
                 </div>
               </div>
@@ -210,7 +236,7 @@ export const ProjectsSection: React.FC = () => {
               <div className="flex justify-end">
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="px-6 py-2 bg-white text-black font-bold text-xs uppercase border border-white hover:bg-black hover:text-white"
+                  className="px-6 py-2 bg-white text-black font-bold text-xs uppercase border border-white hover:bg-black hover:text-white cursor-pointer selection:bg-black selection:text-white"
                 >
                   [CLOSE SPECIFICATION]
                 </button>
